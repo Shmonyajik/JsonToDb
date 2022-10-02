@@ -7,9 +7,8 @@ from loguru import logger
 logger.add(r"Debug\debug{time}.log", format="{time} | {level} | {message}", level="DEBUG", rotation="10 KB", compression="zip")
 
 
-def get_current_list( importJson, task, taskList):
-# def get_current_list( importJson, task):
-    
+def get_current_list( importJson, task = None, taskList = [], counter = 0):
+    counter = counter + 1
     for item in importJson:
         if 'name' in item.keys():
             if item['name'] == 'Name':
@@ -34,9 +33,11 @@ def get_current_list( importJson, task, taskList):
             if item['name'] == 'Subclass':
                 task.occupation_subclass = item['value']
         if 'fields' in item.keys():
-            #get_current_list(item['fields'], task = task)
-            get_current_list(item['fields'], task = task, taskList=taskList)
-    return taskList.append(task)
+            get_current_list(item['fields'], task = task, taskList=taskList, counter=counter)
+    counter = counter - 1
+    if counter == 1:
+        taskList.append(task)
+    return taskList
    
         
  
@@ -52,10 +53,9 @@ def main():
         logger.error(ex.json())
     except Exception as ex:
         logger.error(ex)
-    # DataClassTasks = list(Task())
-    # DataClassTasks.append(get_current_list(importJson['task'], task = Task()))
-    DataClassTasks = get_current_list(importJson['task'], task = Task(), taskList = list(Task()))
-    print(DataClassTasks)
+
+    DataClassTasks = get_current_list(importJson['task'])
+    print(*DataClassTasks, sep='\n\n')
 
     #region old
     # try:

@@ -1,10 +1,9 @@
 from __future__ import annotations
-from dataclasses import dataclass
-from tkinter.messagebox import NO
+
 from typing import List, Optional, Union
 
 from loguru import logger
-from pydantic import BaseModel, root_validator, validator
+from pydantic import BaseModel, root_validator, validator, Field
 
 
 class Task(BaseModel):
@@ -14,24 +13,24 @@ class Task(BaseModel):
     father: str = None
     siblings_by_mother: list[str] | str = None
     owner: str = None
-    owner_species: str = None
-    species_occupation: str = None
-    occupation_class: str = None
-    occupation_subclass: str = None
+    owner_species: str = Field(None, alias='species')
+    species_occupation: str = Field(None, alias='occupation')
+    occupation_class: str = Field(None, alias='a_class')
+    occupation_subclass: str = Field(None, alias='subclass')
 
-    @validator('siblings', pre=True)
-    def value_should_be_bool(cls, value):
-        if value is not False and value is not None:
-            logger.info(f"Значение поля siblings {value} сохранено как True")
-            value = True
-        return value
+    # @validator('siblings', pre=True)
+    # def value_should_be_bool(cls, value):
+    #     if value is not False and value is not None:
+    #         logger.info(f"Значение поля siblings {value} сохранено как True")
+    #         value = True
+    #     return value
     
-    @root_validator(pre=True)
-    def validate(cls, values):
+    # @root_validator(pre=True)
+    # def validate(cls, values):
         
-        return values
-    class Config:
-        validate_assignment = True
+    #     return values
+    # class Config:
+    #     validate_assignment = True
 
 # task = Task(name = 'Denis', siblings='Roma')
 # print(task)
