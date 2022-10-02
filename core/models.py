@@ -1,13 +1,14 @@
 from __future__ import annotations
 from dataclasses import dataclass
+from tkinter.messagebox import NO
 from typing import List, Optional, Union
 
 from loguru import logger
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, root_validator, validator
 
-@dataclass
-class Task:
-    name: str
+
+class Task(BaseModel):
+    name: str = None
     siblings: bool = None
     mother: str = None
     father: str = None
@@ -18,12 +19,22 @@ class Task:
     occupation_class: str = None
     occupation_subclass: str = None
 
-    @validator('siblings')
-    def value_should_be_bool(cls, s):
-        if s is not bool and s is not None:
-            logger.info(f"поле value со значением {s} сохраненно как True")
-            s = True
-        return s
+    @validator('siblings', pre=True)
+    def value_should_be_bool(cls, value):
+        if value is not False and value is not None:
+            logger.info(f"Значение поля siblings {value} сохранено как True")
+            value = True
+        return value
+    
+    @root_validator(pre=True)
+    def validate(cls, values):
+        
+        return values
+    class Config:
+        validate_assignment = True
+
+# task = Task(name = 'Denis', siblings='Roma')
+# print(task)
 
 
 class Field3(BaseModel):
