@@ -44,7 +44,7 @@ def get_current_list( importJson, task = None, taskList = [], counter = 0):
             
 @logger.catch
 def main(): 
-    tasks = None
+   
     try:
         with open('tasks.json', encoding='utf-8' ) as json_data: 
             importJson = json.load(json_data)
