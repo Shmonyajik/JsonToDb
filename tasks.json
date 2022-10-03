@@ -1,12 +1,12 @@
 {
-	"task": [
+	"task": [ 
 		{
-			"id": 8,
+			"id": 8, 
 			"creation_date": "2022-05-09",
 			"cancel_date": "2022-05-10",
-			"fields": [
+			"fields": [ 
 				{
-					"id": 1,
+					"id": 1, 
 					"type": "plain text",
 					"name": "Name",
 					"value": "Huntie Ironforce"
@@ -16,7 +16,7 @@
 					"type": "checkmark",
 					"name": "Siblings",
 					"value": true,
-					"fields": [
+					"fields": [ 
 						{
 							"id": 3,
 							"type": "plain text",
@@ -34,10 +34,10 @@
 			]
 		},
 		{
-			"id": 800,
+			"id": 800, 
 			"creation_date": "2022-06-09",
 			"cancel_date": "2022-07-11",
-			"fields": [
+			"fields": [ 
 				{
 					"id": 1,
 					"type": "plain text",
@@ -49,13 +49,13 @@
 					"type": "checkmark",
 					"name": "Siblings",
 					"value": true,
-					"fields": [
+					"fields": [ 
 						{
 							"id": 3,
 							"type": "plain text",
 							"name": "Mother",
 							"value": "Julia Pitbullsky",
-							"fields": [
+							"fields": [ 
 								{
 									"id": 5,
 									"type": "plain text",

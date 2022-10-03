@@ -1,35 +1,40 @@
 from __future__ import annotations
-from dataclasses import dataclass
+
 from typing import List, Optional, Union
 
 from loguru import logger
-from pydantic import BaseModel, root_validator
+from pydantic import BaseModel, root_validator, validator, Field
 
-
-class Task(BaseModel):
+@dataclass
+class Task:
     name: str
     siblings: bool = None
     mother: str = None
-    # father: str = None
-    # siblings_by_mother: list[str] | str = None
-    # owner: str = None
-    # owner_species: str = None
-    # species_occupation: str = None
-    # occupation_class: str = None
-    # occupation_subclass: str = None
+    father: str = None
+    siblings_by_mother: list[str] | str = None
+    owner: str = None
+    owner_species: str = Field(None, alias='species')
+    species_occupation: str = Field(None, alias='occupation')
+    occupation_class: str = Field(None, alias='a_class')
+    occupation_subclass: str = Field(None, alias='subclass')
 
-    @root_validator
-    def value_should_be_bool(cls, values):
-        logger.info("ВЫЗВАЛОСЬ!!")
-        print(values['mother'])
-        if values["siblings"] is not bool and values["siblings"] is not None:
-            logger.info(f"поле value со значением {values['siblings']} сохраненно как True")
-            values["siblings"] = True
-            logger.info("СВАЛИДИРОВАЛОСЬ!")
-        return values
+    # @validator('siblings', pre=True)
+    # def value_should_be_bool(cls, value):
+    #     if value is not False and value is not None:
+    #         logger.info(f"Значение поля siblings {value} сохранено как True")
+    #         value = True
+    #     return value
+    
+    # @root_validator(pre=True)
+    # def validate(cls, values):
+        
+    #     return values
+    # class Config:
+    #     validate_assignment = True
 
-task = Task(name="Denis", siblings="Roma")
-print(task)
+# task = Task(name = 'Denis', siblings='Roma')
+# print(task)
+
 
 class Field3(BaseModel):
     id: int
