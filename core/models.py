@@ -3,28 +3,33 @@ from dataclasses import dataclass
 from typing import List, Optional, Union
 
 from loguru import logger
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, root_validator
 
-@dataclass
-class Task:
+
+class Task(BaseModel):
     name: str
     siblings: bool = None
     mother: str = None
-    father: str = None
-    siblings_by_mother: list[str] | str = None
-    owner: str = None
-    owner_species: str = None
-    species_occupation: str = None
-    occupation_class: str = None
-    occupation_subclass: str = None
+    # father: str = None
+    # siblings_by_mother: list[str] | str = None
+    # owner: str = None
+    # owner_species: str = None
+    # species_occupation: str = None
+    # occupation_class: str = None
+    # occupation_subclass: str = None
 
-    @validator('siblings')
-    def value_should_be_bool(cls, s):
-        if s is not bool and s is not None:
-            logger.info(f"поле value со значением {s} сохраненно как True")
-            s = True
-        return s
+    @root_validator
+    def value_should_be_bool(cls, values):
+        logger.info("ВЫЗВАЛОСЬ!!")
+        print(values['mother'])
+        if values["siblings"] is not bool and values["siblings"] is not None:
+            logger.info(f"поле value со значением {values['siblings']} сохраненно как True")
+            values["siblings"] = True
+            logger.info("СВАЛИДИРОВАЛОСЬ!")
+        return values
 
+task = Task(name="Denis", siblings="Roma")
+print(task)
 
 class Field3(BaseModel):
     id: int

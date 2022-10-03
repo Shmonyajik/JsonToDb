@@ -18,17 +18,17 @@ def main():
         logger.error(ex.json())
     except Exception as ex:
         logger.error(ex)
-    index = 0
-    DataclassTasks = list()
-    for item in tasks:
-        for item1 in item.fields:
-            DataclassTasks.append(Task(name=item1.name, siblings=item1.value))
-            index = index+1
-            # if item1.fields is not None:
-                # for item2 in item1.fields:
-                #     if item2.name is "Mother":
-                #         DataclassTasks[index].mother = item2.value
-    print(DataclassTasks)
+    # index = 0
+    # DataclassTasks = list()
+    # for item in tasks:
+    #     for item1 in item.fields:
+    #         DataclassTasks.append(Task(name=item1.name, siblings=item1.value))
+    #         index = index+1
+    #         # if item1.fields is not None:
+    #             # for item2 in item1.fields:
+    #             #     if item2.name is "Mother":
+    #             #         DataclassTasks[index].mother = item2.value
+    # print(DataclassTasks)
                         
                         
 
