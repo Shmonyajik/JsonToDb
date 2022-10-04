@@ -20,9 +20,8 @@ class Task():
 
     def get_name_by_alias(self, alias):
         for item in fields(self):
-            print(item.metadata['alias'])
             if item.metadata['alias'] == alias:
                 return item.name
-        
+        logger.info(f'Не удалось найти псевдоним {alias}')
         raise ValueError(f'Не удалось найти псевдоним {alias}')
         

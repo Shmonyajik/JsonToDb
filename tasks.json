@@ -48,7 +48,7 @@
 					"id": 2, 
 					"type": "checkmark",
 					"name": "Siblings",
-					"value": true,
+					"value": 2,
 					"fields": [ 
 						{
 							"id": 3,
